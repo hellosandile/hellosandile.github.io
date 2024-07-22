@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Interactive Crisis Management Themes Mind Map</title>
+    <title>Advanced Interactive Crisis Management Themes and Codes Mind Map</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
@@ -14,9 +14,6 @@
             background: #ffffff;
             color: #000000;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
         }
         .mind-map {
@@ -33,8 +30,8 @@
             color: #ffffff;
             padding: 20px;
             border-radius: 50%;
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -65,11 +62,11 @@
             opacity: 0;
             transform: scale(0.5);
             text-align: center;
-            width: 130px;
+            width: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 60px;
+            height: 50px;
         }
         .theme-node:hover {
             box-shadow: 0 10px 30px rgba(255, 184, 28, 0.5);
@@ -79,32 +76,53 @@
             opacity: 1;
             transform: scale(1);
         }
-        .details-panel {
+        .popup {
             position: fixed;
-            bottom: -300px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%) scale(0.9);
             background: #ffffff;
             padding: 30px;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 100;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            z-index: 200;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .details-panel.active {
-            bottom: 0;
+        .popup.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
-        .details-panel h2 {
-            color: #e03c31;
+        .popup h2 {
+            color: #007749;
             margin-top: 0;
             font-weight: 600;
         }
-        .details-panel p {
+        .popup p {
             color: #000000;
             line-height: 1.8;
             font-weight: 300;
+        }
+        .code-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .code-item {
+            background: #f0f0f0;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .code-item:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
         svg {
             position: absolute;
@@ -131,6 +149,22 @@
             cursor: pointer;
             color: #e03c31;
         }
+        @media (max-width: 768px) {
+            .center-node {
+                width: 120px;
+                height: 120px;
+                font-size: 1em;
+            }
+            .theme-node {
+                width: 100px;
+                height: 40px;
+                font-size: 0.8em;
+            }
+            .popup {
+                max-width: 90%;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,24 +172,28 @@
         <div class="center-node" id="centerNode">Crisis Management Themes</div>
         <svg id="connectionsSvg"></svg>
     </div>
-    <div class="details-panel" id="detailsPanel">
-        <h2 id="detailTitle"></h2>
-        <p id="detailDescription"></p>
-        <button class="close-btn" onclick="hideDetails()">&times;</button>
+    <div class="popup" id="themePopup">
+        <h2 id="themeTitle"></h2>
+        <ul id="codeList" class="code-list"></ul>
+        <button class="close-btn" onclick="hidePopup('themePopup')">&times;</button>
+    </div>
+    <div class="popup" id="expertPopup">
+        <h2 id="expertTitle"></h2>
+        <p id="expertDescription"></p>
+        <button class="close-btn" onclick="hidePopup('expertPopup')">&times;</button>
     </div>
 
     <script>
     const themes = [
-        {title: "Vulnerability Assessment", description: "Includes Ecological Vulnerability Indicators, INFORM Risk Index, and Hotspot Detection"},
-        {title: "Climate Change Adaptation", description: "Encompasses Climate Change Projections, Climate Adaptation Measures, and Adaptation Strategies"},
-        {title: "Urban and Rural Resilience", description: "Covers Urban Flood Management, Community Resilience, and Rural-specific approaches"},
-        {title: "Governance and Policy", description: "Includes Policy and Governance, Government Policy Measures, and Policy Integration"},
-        {title: "Infrastructure Management", description: "Covers Infrastructure Development, Asset Management, and Resource Allocation"},
-        {title: "Socio-economic Factors", description: "Addresses Socio-economic Factors, Community Impact, and Vulnerability of Food Systems"},
-        {title: "Stakeholder Engagement", description: "Includes Stakeholder Collaboration, Community Participation, and International Support"},
-        {title: "Capacity Building", description: "Covers Capacity Building, Local Knowledge and Practices, and Early Warning Systems"},
-        {title: "Disaster Response", description: "Includes Emergency Response, Long-Term Recovery, and Lessons Learned"},
-        {title: "Sustainable Development", description: "Addresses how these strategies align with and support Sustainable Development Goal 11"}
+        {
+            title: "Vulnerability Assessment",
+            codes: [
+                {code: "Ecological Vulnerability Indicators", expert: "Estimation of ecological drought vulnerability indicators is the important step for drought mitigation management."},
+                {code: "INFORM Risk Index", expert: "INFORM Risk Index is a global indicator-based disaster risk assessment tool that combines hazards, exposure, vulnerability and lack of coping capacity indicators with the purpose to support humanitarian crisis management decisions considering the current climate and population."},
+                {code: "Hotspot Detection", expert: "Focusing on countries with greater than 0.05% estimated malaria slide prevalence in 2020, we identify 20 countries in which the majority of first administrative units are classified as High Innate Risk (reaching the 5% threshold within 6 years)"}
+            ]
+        },
+        // Add more themes here...
     ];
 
     let themesVisible = false;
@@ -169,8 +207,8 @@
         const centerY = rect.height / 2;
         const radius = Math.min(rect.width, rect.height) * 0.35;
 
-        centerNode.style.left = `${centerX - 90}px`;
-        centerNode.style.top = `${centerY - 90}px`;
+        centerNode.style.left = `${centerX - 75}px`;
+        centerNode.style.top = `${centerY - 75}px`;
 
         themes.forEach((theme, index) => {
             const angle = (index / themes.length) * 2 * Math.PI;
@@ -180,16 +218,15 @@
             const themeNode = document.createElement('div');
             themeNode.className = 'theme-node';
             themeNode.textContent = theme.title;
-            themeNode.style.left = `${x - 65}px`;
-            themeNode.style.top = `${y - 30}px`;
+            themeNode.style.left = `${x - 60}px`;
+            themeNode.style.top = `${y - 25}px`;
             themeNode.onclick = (e) => {
                 e.stopPropagation();
-                showDetails(theme.title, theme.description);
+                showThemeDetails(theme.title, theme.codes);
             };
 
             mindMap.appendChild(themeNode);
 
-            // Create SVG path for connection
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             const d = `M${centerX},${centerY} Q${centerX + (x-centerX)*0.5},${centerY + (y-centerY)*0.5} ${x},${y}`;
             path.setAttribute('d', d);
@@ -215,26 +252,48 @@
         });
     }
 
-    function showDetails(title, description) {
-        const detailsPanel = document.getElementById('detailsPanel');
-        const detailTitle = document.getElementById('detailTitle');
-        const detailDescription = document.getElementById('detailDescription');
+    function showThemeDetails(title, codes) {
+        const themePopup = document.getElementById('themePopup');
+        const themeTitle = document.getElementById('themeTitle');
+        const codeList = document.getElementById('codeList');
 
-        detailTitle.textContent = title;
-        detailDescription.textContent = description;
-        detailsPanel.classList.add('active');
+        themeTitle.textContent = title;
+        codeList.innerHTML = '';
+        codes.forEach(codeObj => {
+            const li = document.createElement('li');
+            li.className = 'code-item';
+            li.textContent = codeObj.code;
+            li.onclick = () => showExpertInfo(codeObj.code, codeObj.expert);
+            codeList.appendChild(li);
+        });
+        showPopup('themePopup');
     }
 
-    function hideDetails() {
-        const detailsPanel = document.getElementById('detailsPanel');
-        detailsPanel.classList.remove('active');
+    function showExpertInfo(title, description) {
+        const expertTitle = document.getElementById('expertTitle');
+        const expertDescription = document.getElementById('expertDescription');
+
+        expertTitle.textContent = title;
+        expertDescription.textContent = description;
+        showPopup('expertPopup');
+    }
+
+    function showPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.add('active');
+    }
+
+    function hidePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.remove('active');
     }
 
     document.getElementById('centerNode').addEventListener('click', toggleThemes);
 
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.theme-node') && !e.target.closest('.details-panel') && !e.target.closest('.center-node')) {
-            hideDetails();
+        if (!e.target.closest('.theme-node') && !e.target.closest('.popup') && !e.target.closest('.center-node')) {
+            hidePopup('themePopup');
+            hidePopup('expertPopup');
         }
     });
 
