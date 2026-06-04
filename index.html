@@ -1,445 +1,1101 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Group 69 Themes and Codes Mind Map </title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moabi & Lebo | Traditional Wedding Celebration</title>
+  <meta name="description" content="Moabi and Lebo traditional wedding celebration, 26 September 2026, Sunnyside Farm, Vryburg, North West.">
 
-        body, html {
-                margin: 0;
-                padding: 0;
-                font-family: 'Poppins', sans-serif;
-                background: #ffffff;
-                color: #000000;
-                height: 100vh;
-                overflow: hidden;
-                position: relative; /* Ensure the pseudo-element is positioned correctly */
-        }
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Parisienne&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        body::before {
-                content: "";
-                background: url('150_unisa.jpg') no-repeat center center/cover;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                opacity: 0.3; /* Adjust the opacity for fading effect */
-                background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
-                background-blend-mode: darken; /* Blend the image with the dark overlay */
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:        '#17110d',
+            cream:      '#f5ece0',
+            'cream-2':  '#ead7bc',
+            'cream-3':  '#e2c99a',
+            dark:       '#25150e',
+            'dark-2':   '#3a2116',
+            gold:       '#c8882e',
+            'gold-lt':  '#e0a94a',
+            'gold-pale':'#f0d49a',
+            tan:        '#efc992',
+            muted:      '#5a4636',
+            'muted-lt': '#7a6050',
+          },
+          fontFamily: {
+            serif:   ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans:    ['Inter', 'sans-serif'],
+            cursive: ['Parisienne', 'cursive'],
+          },
+          boxShadow: {
+            'gold-sm': '0 2px 20px rgba(200,136,46,0.18)',
+            'gold-md': '0 4px 40px rgba(200,136,46,0.25)',
+            'gold-lg': '0 8px 60px rgba(200,136,46,0.30)',
+          },
+          backgroundImage: {
+            'gold-gradient': 'linear-gradient(135deg, #c8882e 0%, #e0a94a 50%, #c8882e 100%)',
+          }
         }
+      }
+    }
+  </script>
 
-        .mind-map {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-        .center-node {
-            background: #007749;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0, 119, 73, 0.3);
-            z-index: 10;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: absolute;
-            font-size: 1.2em;
-        }
-        .center-node:hover {
-            box-shadow: 0 15px 40px rgba(0, 119, 73, 0.5);
-            transform: scale(1.05);
-        }
-        .theme-node {
-            position: absolute;
-            background: #ffb81c;
-            color: #000000;
-            padding: 15px;
-            border-radius: 30px;
-            font-size: 0.9em;
-            font-weight: 400;
-            box-shadow: 0 5px 20px rgba(255, 184, 28, 0.3);
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            opacity: 0;
-            transform: scale(0.5);
-            text-align: center;
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50px;
-        }
-        .theme-node:hover {
-            box-shadow: 0 10px 30px rgba(255, 184, 28, 0.5);
-            transform: scale(1.1) !important;
-        }
-        .theme-node.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            max-width: 80%;
-            max-height: 80%;
-            overflow-y: auto;
-            z-index: 200;
-            display: none;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        .popup.active {
-            display: block;
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .popup h2 {
-            color: #007749;
-            margin-top: 0;
-            font-weight: 600;
-        }
-        .popup p {
-            color: #000000;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-        .code-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .code-item {
-            background: #f0f0f0;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .code-item:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
-        }
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        path {
-            fill: none;
-            stroke: #007749;
-            stroke-width: 2;
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #e03c31;
-        }
-        @media (max-width: 768px) {
-            .center-node {
-                width: 120px;
-                height: 120px;
-                font-size: 1em;
-            }
-            .theme-node {
-                width: 100px;
-                height: 40px;
-                font-size: 0.8em;
-            }
-            .popup {
-                max-width: 90%;
-                padding: 20px;
-            }
-        }
-    </style>
+  <style>
+    /* ── Scrollbar ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #17110d; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(#c8882e, #e0a94a); border-radius: 4px; }
+
+    /* ── Zulu Geometric Pattern ─────────────────────────────── */
+    .zulu-pattern-bg {
+      background-color: #1e0f08;
+      background-image:
+        linear-gradient(30deg,  #190d06 12%, transparent 12.5%, transparent 87%, #190d06 87.5%),
+        linear-gradient(150deg, #190d06 12%, transparent 12.5%, transparent 87%, #190d06 87.5%),
+        linear-gradient(30deg,  #190d06 12%, transparent 12.5%, transparent 87%, #190d06 87.5%),
+        linear-gradient(150deg, #190d06 12%, transparent 12.5%, transparent 87%, #190d06 87.5%),
+        linear-gradient(60deg,  #2b1409 25%, transparent 25.5%, transparent 75%, #2b1409 75.5%),
+        linear-gradient(60deg,  #2b1409 25%, transparent 25.5%, transparent 75%, #2b1409 75.5%);
+      background-size: 40px 70px;
+      background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+    }
+
+    /* ── Gold shimmer text ──────────────────────────────────── */
+    @keyframes gold-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+    .gold-shimmer {
+      background: linear-gradient(120deg, #c8882e 0%, #e0a94a 30%, #f5d78e 50%, #e0a94a 70%, #c8882e 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gold-shimmer 4s linear infinite;
+    }
+
+    /* ── Scroll reveal ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left  { opacity: 0; transform: translateX(-36px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+    .reveal-right { opacity: 0; transform: translateX( 36px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+    .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* ── Loader rotate ──────────────────────────────────────── */
+    @keyframes rotate-bead { to { transform: rotate(360deg); } }
+    .animate-rotate-bead { animation: rotate-bead 22s linear infinite; }
+
+    @keyframes counter-rotate { to { transform: rotate(-360deg); } }
+    .animate-counter-rotate { animation: counter-rotate 30s linear infinite; }
+
+    /* ── Pulse glow ─────────────────────────────────────────── */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50%       { opacity: 0.70; transform: scale(1.04); }
+    }
+    .animate-pulse-slow { animation: pulse-slow 5s ease-in-out infinite; }
+
+    /* ── Floating bead particles ────────────────────────────── */
+    @keyframes float-up {
+      0%   { transform: translateY(0)   rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-80px) rotate(180deg); opacity: 0; }
+    }
+    .bead-particle {
+      position: absolute; width: 5px; height: 5px;
+      background: #c8882e; border-radius: 50%;
+      animation: float-up 6s ease-in-out infinite;
+    }
+
+    /* ── Desktop nav link hover line ────────────────────────── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -3px;
+      width: 0; height: 1px; background: #c8882e;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── Radio card interactive ─────────────────────────────── */
+    .radio-card { cursor: pointer; transition: all 0.25s ease; }
+    .radio-card.selected {
+      background: rgba(200,136,46,0.12);
+      border-color: #c8882e;
+      box-shadow: 0 0 0 1.5px #c8882e, 0 4px 20px rgba(200,136,46,0.15);
+    }
+
+    /* ── Ornate horizontal rule ─────────────────────────────── */
+    .ornate-rule {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .ornate-rule::before, .ornate-rule::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(200,136,46,0.5));
+    }
+    .ornate-rule::after {
+      background: linear-gradient(to left, transparent, rgba(200,136,46,0.5));
+    }
+
+    /* ── Countdown flip-card ────────────────────────────────── */
+    .count-card {
+      background: linear-gradient(160deg, #2d1910 0%, #1a0d07 100%);
+      border: 1px solid rgba(200,136,46,0.25);
+      position: relative; overflow: hidden;
+    }
+    .count-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(200,136,46,0.08) 0%, transparent 70%);
+    }
+
+    /* ── Form input hover glow ──────────────────────────────── */
+    .form-input:focus {
+      box-shadow: 0 0 0 2px rgba(200,136,46,0.35), 0 4px 16px rgba(200,136,46,0.10);
+    }
+
+    /* ── Section decorative corners ─────────────────────────── */
+    .corner-tl, .corner-tr, .corner-bl, .corner-br {
+      position: absolute; width: 28px; height: 28px;
+      border-color: rgba(200,136,46,0.4);
+      border-style: solid;
+    }
+    .corner-tl { top: 12px; left: 12px;  border-width: 1px 0 0 1px; }
+    .corner-tr { top: 12px; right: 12px; border-width: 1px 1px 0 0; }
+    .corner-bl { bottom: 12px; left: 12px;  border-width: 0 0 1px 1px; }
+    .corner-br { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
+
+    /* ── Button primary ─────────────────────────────────────── */
+    .btn-primary {
+      background: linear-gradient(135deg, #c8882e 0%, #e0a94a 50%, #c8882e 100%);
+      background-size: 200% auto;
+      transition: background-position 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-position: right center;
+      box-shadow: 0 6px 30px rgba(200,136,46,0.45);
+      transform: translateY(-1px);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── Glass card ─────────────────────────────────────────── */
+    .glass-card {
+      background: rgba(245,236,224,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(200,136,46,0.18);
+    }
+
+    /* ── Journey step number ────────────────────────────────── */
+    .step-num {
+      background: linear-gradient(135deg, #c8882e, #e0a94a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
 </head>
-<body>
-    <div class="mind-map" id="mindMap">
-        <div class="center-node" id="centerNode">Themes</div>
-        <svg id="connectionsSvg"></svg>
+<body class="bg-dark text-ink font-sans antialiased overflow-x-hidden selection:bg-gold-lt selection:text-dark">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       WELCOME LOADER
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="loader" class="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-dark zulu-pattern-bg px-6 transition-opacity duration-1000 ease-out">
+    <!-- Ambient glow -->
+    <div class="absolute w-96 h-96 bg-gold/8 rounded-full blur-[80px] pointer-events-none animate-pulse-slow"></div>
+
+    <div class="relative flex flex-col items-center max-w-sm text-center">
+      <!-- Rotating emblem -->
+      <div class="relative w-40 h-40 mb-8 flex items-center justify-center">
+        <!-- Outer ring -->
+        <div class="absolute inset-0 animate-rotate-bead">
+          <svg class="w-full h-full text-gold/70" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="5 3"/>
+          </svg>
+        </div>
+        <!-- Mid ring -->
+        <div class="absolute inset-4 animate-counter-rotate">
+          <svg class="w-full h-full text-gold/40" viewBox="0 0 100 100">
+            <polygon points="50,6 94,50 50,94 6,50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <!-- Inner static -->
+        <svg class="w-20 h-20 text-gold" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="8 5"/>
+          <path d="M50,20C46,28 42,36 42,50C42,64 46,72 50,80C54,72 58,64 58,50C58,36 54,28 50,20Z" fill="currentColor" opacity="0.85"/>
+          <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="50" cy="50" r="4" fill="#1a0d07"/>
+        </svg>
+      </div>
+
+      <span class="text-gold/80 font-display text-xs tracking-[0.4em] uppercase mb-4 block opacity-0 translate-y-4 transition-all duration-700 ease-out" id="loader-subtitle">
+        Siyakwamukela
+      </span>
+      <h2 class="text-cream font-cursive text-5xl md:text-6xl font-light mb-3 opacity-0 translate-y-4 transition-all duration-700 delay-200 ease-out" id="loader-title">
+        Moabi &amp; Lebo
+      </h2>
+      <p class="text-cream-2/60 font-display text-[10px] tracking-[0.3em] uppercase opacity-0 translate-y-4 transition-all duration-700 delay-400 ease-out" id="loader-desc">
+        The Joining of Two Houses
+      </p>
+
+      <div class="w-20 h-[1px] bg-gradient-to-r from-transparent via-gold/60 to-transparent my-6 scale-x-0 transition-all duration-700 delay-600" id="loader-line"></div>
     </div>
-    <div class="popup" id="themePopup">
-        <h2 id="themeTitle"></h2>
-        <ul id="codeList" class="code-list"></ul>
-        <button class="close-btn" onclick="hidePopup('themePopup')">&times;</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STICKY DESKTOP / MOBILE NAVIGATION
+  ══════════════════════════════════════════════════════════════ -->
+  <nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 opacity-0 pointer-events-none" aria-label="Site navigation">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo / Wordmark -->
+      <a href="#top" class="font-cursive text-gold text-2xl lg:text-3xl hover:opacity-80 transition-opacity shrink-0">
+        Moabi &amp; Lebo
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="hidden lg:flex items-center gap-10 list-none m-0 p-0">
+        <li><a href="#our-path"   class="nav-link font-display text-[10px] tracking-[0.25em] uppercase text-cream/70 hover:text-gold transition-colors">Our Story</a></li>
+        <li><a href="#venue"      class="nav-link font-display text-[10px] tracking-[0.25em] uppercase text-cream/70 hover:text-gold transition-colors">Venue</a></li>
+        <li><a href="#countdown"  class="nav-link font-display text-[10px] tracking-[0.25em] uppercase text-cream/70 hover:text-gold transition-colors">Countdown</a></li>
+        <li><a href="#rsvp"       class="font-display text-[10px] tracking-[0.25em] uppercase px-5 py-2 rounded-full border border-gold/60 text-gold hover:bg-gold hover:text-dark transition-all duration-300">RSVP</a></li>
+      </ul>
+
+      <!-- Mobile hamburger -->
+      <button id="mobile-menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 group" aria-label="Open menu">
+        <span class="block w-5 h-[1.5px] bg-cream/80 group-hover:bg-gold transition-colors"></span>
+        <span class="block w-4 h-[1.5px] bg-cream/60 group-hover:bg-gold transition-colors ml-auto"></span>
+        <span class="block w-5 h-[1.5px] bg-cream/80 group-hover:bg-gold transition-colors"></span>
+      </button>
     </div>
-    <div class="popup" id="expertPopup">
-        <h2 id="expertTitle"></h2>
-        <p id="expertDescription"></p>
-        <button class="close-btn" onclick="hidePopup('expertPopup')">&times;</button>
+  </nav>
+
+  <!-- Mobile slide-down menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 right-0 z-40 bg-dark/98 border-b border-gold/20 pt-20 pb-8 px-8 hidden flex-col gap-6 backdrop-blur-md">
+    <a href="#our-path"  class="font-display text-[11px] tracking-[0.3em] uppercase text-cream/80 hover:text-gold transition-colors py-2 border-b border-cream/5" onclick="closeMobileMenu()">Our Story</a>
+    <a href="#venue"     class="font-display text-[11px] tracking-[0.3em] uppercase text-cream/80 hover:text-gold transition-colors py-2 border-b border-cream/5" onclick="closeMobileMenu()">Venue</a>
+    <a href="#countdown" class="font-display text-[11px] tracking-[0.3em] uppercase text-cream/80 hover:text-gold transition-colors py-2 border-b border-cream/5" onclick="closeMobileMenu()">Countdown</a>
+    <a href="#rsvp"      class="font-display text-[11px] tracking-[0.3em] uppercase text-gold py-2" onclick="closeMobileMenu()">RSVP Now</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="relative min-h-screen flex items-center justify-center text-center px-6 py-28 text-cream zulu-pattern-bg overflow-hidden" id="top">
+    <!-- layered gradients -->
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/50 via-dark/70 to-dark pointer-events-none"></div>
+    <!-- ambient glow spot -->
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/6 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"></div>
+
+    <!-- Floating bead particles -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <span class="bead-particle" style="left:15%; top:80%; animation-delay:0s;   animation-duration:7s;  background:#c8882e;"></span>
+      <span class="bead-particle" style="left:30%; top:85%; animation-delay:1.5s; animation-duration:9s;  background:#e0a94a; width:4px; height:4px;"></span>
+      <span class="bead-particle" style="left:55%; top:90%; animation-delay:3s;   animation-duration:8s;  background:#c8882e; width:6px; height:6px;"></span>
+      <span class="bead-particle" style="left:70%; top:80%; animation-delay:0.8s; animation-duration:10s; background:#e0a94a; width:3px; height:3px;"></span>
+      <span class="bead-particle" style="left:85%; top:88%; animation-delay:2.2s; animation-duration:7s;  background:#c8882e; width:5px; height:5px;"></span>
     </div>
 
-    <script>
-    const themes = [
-    {
-        title: "Response Management",
-        codes: [
-            {
-                code: "Mitigation",
-                expert: "(1) Estimation of ecological drought vulnerability indicators is the important step for drought mitigation management - (2) Adaptation and mitigation are crucial when it comes to managing the impacts of climate change."
-            },
-            {
-                code: "Risk Management",
-                expert: "(1) The ISO 31000 principles provide a robust framework for managing risks, aiding in the identification and prioritization of risks associated with climate change. - (2) Access to formal risk financing instruments, such as insurance, can help Senegalese farmers transfer excessive losses to a third party (such as an insurance company) thus stabilizing household income, facilitating their access to credit, and ultimately enhancing their livelihoods. Thus, risk management is essentially the responsibility of individual farmers and their extended households. - (3) Adaptive management for urban flood management can help build resilience in cities like Accra, Ghana, by integrating flexible and responsive strategies to cope with the uncertainties of flood events."
-            },
-            {
-                code: "Community",
-                expert: "(1) The Eastern Cape (EC) province is highly vulnerable to disaster because of a high level of poverty, low standards of living, environmental degradation, poor household economies and a lack of access to resources. - (2) Building community resilience involves engaging local communities in flood management practices and ensuring they have the resources and knowledge to respond effectively to flood risks. - (3) Collaboration among stakeholders, including government agencies, NGOs, and community groups, is vital for the successful implementation of adaptive management practices."
-            }
-        ]
-    },
-    {
-        title: "Education and Training",
-        codes: [
-            {
-                code: "Risk Reduction",
-                expert: "(1) The ISO 31000 principles provide a robust framework for managing risks, aiding in the identification and prioritization of risks associated with climate change. - (2) Estimation of ecological drought vulnerability indicators is the important step for drought mitigation management."
-            },
-            {
-                code: "Education",
-                expert: "(1) This should be considered during future online training, and emphasis placed on the need for supplementary practical training in conjunction with local role players before responding to flood disasters - (2) The identification and analysis of ecological vulnerability indicators to drought would aid in reconsidering priorities for the government to implement appropriate policy measures in response to drought and suggest strategies to reduce drought vulnerability. - (3) Effective governance and policy frameworks are essential for implementing adaptive management strategies that can enhance resilience to urban flooding. (4) INFORM Risk Index is a global indicator-based disaster risk assessment tool that combines hazards, exposure, vulnerability and lack of coping capacity indicators with the purpose to support humanitarian crisis management decisions considering the current climate and population."
-            },
-            {
-                code: "Training",
-                expert: "Lack of awareness and knowledge about IPP commitments made during the bidding process are responsible for the ‘wait and see’ approach of local leaders and community members. In the short-term, awareness and capacity-building interventions for local leaders and community members."
-            },
-            {
-                code: "African Context",
-                expert: "(1) The South African government believes that the key to food security lies in investing in smallholder agriculture and have committed to pumping R5.5-billion of the national budget to support 435000 subsistence and smallholder farmers - (2) Eastern Cape is regarded as one of the South African provinces that is food insecure even though the province consists of many rural areas with large arable land that can provide food security channels"
-            }
-        ]
-    },
-    {
-        title: "Socio-Economic Impact",
-        codes: [
-            {
-                code: "Economic Resilience",
-                expert: "The persistence of this latent surplus population, given the fragile socio-ecological conditions in which it took place, along with low returns to farmers and migrant labourers, has been subject to a number of crises driven by the conjunction of economic restructuring with weather and climate variations."
-            },
-            {
-                code: "Urban Resilience",
-                expert: "(1) Assist people with evacuation Assist people with evacuation - Help people move livestock/animals and assets to safety. - (2) Disseminate early warning messages. - (3) Issues at multiple connected scales, in times of change and uncertainty (Novellie et al., 2016). Single-level governance units usually lack requisite - (4) This article explores various climate adaptation measures aimed at enhancing urban resilience. It provides practical strategies for urban areas."
-            },
-            {
-                code: "Socio-economic Factors",
-                expert: "(1) Strained relationships made a collegial approach to finding solutions and compensating for unavailable medicines difficult. - (2) Socio-economic factors, such as poverty and housing conditions, significantly influence the vulnerability of urban populations to flood events."
-            }
-        ]
-    },
-    {
-        title: "Susceptibility",
-        codes: [
-            {
-                code: "Vulnerability",
-                expert: "(1) The results identified overgrazing, soil erosion, land degradation, surface and groundwater supply, and land use management as the main ecological vulnerability variables. - (2) High rainfall districts in this study showed higher ecological vulnerability to drought because of poor planning and management of water supply, poor grazing practices and land management that leads to serious land degradation. - (3) Witkamp et al. (2011) explain such phenomena as selection pressure. Intermediary actors help niches increase robustness, and eventually translate selection pressure into feedback stimulating learning that improves niche performance."
-            },
-            {
-                code: "Challenges",
-                expert: "Such challenges are not only related to water facilities, but other community owned facilities such as school buildings, institutional latrines and clinics."
-            }
-        ]
-    },
-    {
-        title: "Institutional and Humanitarian Response",
-        codes: [
-            {
-                code: "Communication",
-                expert: "(1) Academic research on organisational communication largely examines the different processes involved when individuals interact in complex organisations, including group, interpersonal, and 'network communication. Strategic communication concentrates on how the organisation presents itself through the deliberate activities of its communication practitioners, leaders, and employees. This does not exclude their use of networks or relationship building in the strategic process - (2) ICT is comprised of a variety of ‘communication equipment’ which includes radio, television (TV), and communication equipment and software."
-            },
-            {
-                code: "Social Resilience",
-                expert: "(1) This study adds to the already-existing work that has been carried out in other African countries such as Nigeria, South Africa, Angola and Ghana on the role played by business in fostering community development through CSR. - (2) In sub-Saharan Africa, the high prevalence of cellphone and smart phone use is a source of potentially valuable mobility data for public health purposes."
-            },
-            {
-                code: "Strategies",
-                expert: "Adaptation strategies such as the adoption of climate-resilient crops, improved irrigation practices, and diversification of livelihoods are essential to mitigate the impacts of climate change on food security."
-            }
-        ]
-    },
-    {
-        title: "Natural Disasters",
-        codes: [
-            {
-                code: "Climate Change",
-                expert: "(1) In this exploratory study, we extend the Index to include future climate change and population projections using RCP 8.5 climate projections of coastal flood, river flood and drought, and SSP3 and SSP5 population projections for the period 2036 to 2065. - (2) Such policies and strategies will strengthen climate change adaptation and ensure ecological and climate sustainability that comply with the Millennium Development Goals set out by the United Nations in 2000 and the subsequent 2030 development agenda for the Sustainable Development Goals. - (3) These measures, which involve adjustments in ecological, social, or economic systems in response to actual or expected climate stimuli, play a crucial role in reducing the vulnerability of urban areas and ensuring their continued functioning in the face of climate change."
-            },
-            {
-                code: "Natural disasters",
-                expert: "(1) Natural disasters and food insecurity are directly interconnected. Climate change related hazards such as floods, hurricanes, tsunamis, droughts and other risks can weaken food security and severely impact agricultural activities. - (2) The third application of SLA to volcanoes is managing crises. This is where countries affected have to look at the measures in place which deal with emergency situations. In most cases, unpreparedness, lack of funds and support from the international community and the national government may result in grave consequences. Consequently, there is a need to look at stakeholders who can help, prevent natural disasters from happening. (3) This study focuses on the intersection of climate change, disaster management, and primary health care in Zimbabwe. It highlights the importance of integrated approaches to enhance community resilience and sustainable urban development."
-            }
-        ]
-    },
-    {
-        title: "Resource Management",
-        codes: [
-            {
-                code: "Resources",
-                expert: "(1) Investments in resilient infrastructure, such as improved drainage systems and flood barriers, are critical components of adaptive management in urban flood contexts. - (2) Increased water storage, thorough construction of reservoirs and protection of water sources; water supply and sanitation; improvements of drainage and irrigation systems to ensure food security; and reduction of the effects of floods within the region (DEA 2014; SADC 2011). - (3) Designed with easy maintenance in mind, the system does not require a high level of technical expertise from the user or maintenance crews."
-            },
-            {
-                code: "Asset Management",
-                expert: "The ISO 55000 principles guide the management of assets, which are crucial for the implementation of the adaptation measures"
-            },
-            {
-                code: "Cross - Sector",
-                expert: "(1) Mozambique is part of the agreement because one of the interim measures which came about as a result of the agreement was that the Komati and Crocodile catchments should maintain a cross-border release of 2 m. - (2) This is especially important in both preparing for crises and managing their effects, an area that may require specific international donor agencies’ support for technology and knowledge capacity building. - (3) Anticipatory action to manage climate risks: Lessons from the Red Cross Red Crescent in Southern Africa, Bangladesh, and beyond."
-            }
-        ]
-    },
-    {
-        title: "SDG Alignment",
-        codes: [
-            {
-                code: "Sustainability",
-                expert: "This article discusses anticipatory actions to manage climate risks, drawing lessons from the Red Cross Red Crescent experiences. It emphasizes the importance of proactive measures in reducing the impact of natural disasters and enhancing urban resilience."
-            },
-            {
-                code: "Adaptation",
-                expert: "(1) Impulsivity (lack of self-regulation and the tendency to act without regard to consequences or plans) is proposed as an adaptive psychological response to changing environments where prior environmental expectations for returns on investment are no longer accurate. - (2) Adapting to climate change, as it engenders a negligence that adversely affects the reciprocal relationship between humankind and nature. This view coincides with the idea of humankind’s dominion over nature, rather than stewardship, where humans can use and abuse nature in any way they choose (and consequently contribute to climate change). - (3) Key weaknesses in the structural and institutional framework hampered the efficient management of the Ebola fever outbreak and exacerbated the magnitude of factors that led to many deaths in the Bundibugyo District."
-            }
-        ]
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col items-center max-w-3xl mx-auto reveal" id="hero-content">
+      <!-- Crest emblem -->
+      <div class="mb-8 animate-pulse-slow">
+        <svg class="w-14 h-14 lg:w-20 lg:h-20 text-gold" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M32,4C28,12 22,22 22,32C22,42 28,52 32,60C36,52 42,42 42,32C42,22 36,12 32,4Z"/>
+          <line x1="32" y1="4" x2="32" y2="60" stroke-width="0.8" opacity="0.6"/>
+          <polygon points="32,22 24,32 32,42 40,32" fill="rgba(200,136,46,0.2)" stroke-width="1"/>
+          <circle cx="32" cy="4"  r="2" fill="currentColor"/>
+          <circle cx="32" cy="60" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+
+      <p class="font-display text-[10px] lg:text-xs tracking-[0.4em] uppercase text-gold-lt mb-6">
+        Rooted in Culture · Dressed in Love
+      </p>
+
+      <h1 class="font-serif font-light tracking-wider flex flex-col items-center gap-1 my-2 text-cream leading-none">
+        <span class="text-6xl md:text-8xl lg:text-[10rem] xl:text-[11rem] uppercase">Moabi</span>
+        <span class="gold-shimmer font-cursive text-5xl md:text-6xl lg:text-7xl normal-case my-2">&amp;</span>
+        <span class="text-6xl md:text-8xl lg:text-[10rem] xl:text-[11rem] uppercase">Lebo</span>
+      </h1>
+
+      <!-- Date bar -->
+      <div class="flex items-center gap-4 mt-8 mb-4">
+        <div class="w-8 h-[1px] bg-gold/50"></div>
+        <p class="font-display text-[10px] lg:text-xs tracking-[0.35em] uppercase text-gold">26 September 2026</p>
+        <div class="w-8 h-[1px] bg-gold/50"></div>
+      </div>
+      <p class="font-serif text-sm italic tracking-widest text-cream-2/80">Traditional Wedding Celebration</p>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-10">
+        <a href="#rsvp" class="btn-primary px-10 py-3.5 rounded-full text-dark font-display text-[10px] tracking-[0.3em] uppercase shadow-gold-md">
+          Confirm Attendance
+        </a>
+        <a href="#our-path" class="px-10 py-3.5 rounded-full border border-cream/30 text-cream hover:border-gold/60 hover:text-gold font-display text-[10px] tracking-[0.3em] uppercase transition-all duration-300">
+          Our Story
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+      <span class="font-display text-[9px] tracking-[0.3em] uppercase text-cream">Scroll</span>
+      <div class="w-[1px] h-8 bg-gradient-to-b from-gold/60 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HOUSES / FAMILIES
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="bg-cream py-20 px-6" aria-label="Families">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
+
+        <!-- House of Modise -->
+        <article class="reveal reveal-left glass-card rounded-3xl p-8 lg:p-10 text-center shadow-gold-sm">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-5 border border-gold/25">
+            <div class="w-3 h-3 bg-gold rotate-45"></div>
+          </div>
+          <p class="font-display text-xl lg:text-2xl font-medium uppercase tracking-widest text-dark">Modise</p>
+          <p class="font-serif italic text-muted-lt text-sm mt-2">House of Modise</p>
+          <p class="font-display text-[9px] tracking-[0.3em] uppercase text-gold/70 mt-4">Groom's Family</p>
+        </article>
+
+        <!-- Connector -->
+        <div class="reveal flex flex-col items-center justify-center gap-4 py-4">
+          <div class="w-[1px] h-10 bg-gradient-to-b from-transparent via-gold/50 to-transparent hidden md:block"></div>
+          <span class="gold-shimmer font-cursive text-5xl">&amp;</span>
+          <div class="flex gap-2">
+            <span class="w-2.5 h-2.5 bg-gold rotate-45 opacity-60"></span>
+            <span class="w-3   h-3   bg-dark rotate-45"></span>
+            <span class="w-2.5 h-2.5 bg-gold rotate-45 opacity-60"></span>
+          </div>
+          <div class="w-[1px] h-10 bg-gradient-to-b from-transparent via-gold/50 to-transparent hidden md:block"></div>
+        </div>
+
+        <!-- House of Kambule -->
+        <article class="reveal reveal-right glass-card rounded-3xl p-8 lg:p-10 text-center shadow-gold-sm">
+          <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-5 border border-gold/25">
+            <div class="w-3 h-3 bg-gold rotate-45"></div>
+          </div>
+          <p class="font-display text-xl lg:text-2xl font-medium uppercase tracking-widest text-dark">Kambule</p>
+          <p class="font-serif italic text-muted-lt text-sm mt-2">House of Kambule</p>
+          <p class="font-display text-[9px] tracking-[0.3em] uppercase text-gold/70 mt-4">Bride's Family</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INVITATION STATEMENT
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 lg:py-36 px-6 zulu-pattern-bg text-cream overflow-hidden">
+    <div class="absolute inset-0 bg-dark/75 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-dark/30 to-dark/60 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-2xl mx-auto text-center">
+      <!-- Decorative corner accents around the card -->
+      <div class="relative border border-gold/15 rounded-3xl px-8 py-14 lg:px-16 lg:py-20 reveal">
+        <div class="corner-tl"></div>
+        <div class="corner-tr"></div>
+        <div class="corner-bl"></div>
+        <div class="corner-br"></div>
+
+        <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-6">You are cordially invited</p>
+
+        <p class="gold-shimmer font-cursive text-4xl lg:text-5xl mb-6">Moabi &amp; Lebo</p>
+
+        <p class="font-serif text-base lg:text-lg leading-relaxed italic text-cream-2/85 max-w-md mx-auto">
+          The Modise and Kambule families joyfully request the honour of your presence at the traditional wedding celebration of their beloved children.
+        </p>
+
+        <!-- Ornate divider -->
+        <div class="ornate-rule my-8">
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 border border-gold/60 rotate-45"></div>
+            <div class="w-2.5 h-2.5 bg-gold rotate-45"></div>
+            <div class="w-2.5 h-2.5 border border-gold/60 rotate-45"></div>
+          </div>
+        </div>
+
+        <p class="font-display text-[10px] lg:text-xs tracking-[0.3em] uppercase text-cream font-semibold">
+          26 September 2026
+        </p>
+        <p class="font-display text-[10px] tracking-[0.2em] uppercase text-gold/70 mt-2">
+          Vryburg, North West · South Africa
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OUR PATH — TRADITIONAL JOURNEY
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 px-6 bg-cream" id="our-path" aria-labelledby="journey-title">
+    <!-- Section header -->
+    <div class="text-center mb-16 reveal">
+      <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Our Tradition</p>
+      <h2 id="journey-title" class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light uppercase tracking-widest text-dark">
+        Our Path
+      </h2>
+      <p class="font-serif italic text-muted-lt mt-3">The Traditional Journey</p>
+      <div class="ornate-rule mt-6 max-w-xs mx-auto">
+        <div class="flex gap-1">
+          <div class="w-2 h-2 bg-gold rotate-45 opacity-60"></div>
+          <div class="w-2.5 h-2.5 bg-gold rotate-45"></div>
+          <div class="w-2 h-2 bg-gold rotate-45 opacity-60"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Steps — 2-col desktop -->
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Step 01 -->
+      <article class="reveal group flex gap-5 p-7 lg:p-8 bg-cream-2/40 border border-dark/6 rounded-2xl hover:border-gold/35 hover:bg-cream-2/60 hover:shadow-gold-sm transition-all duration-400">
+        <div class="shrink-0 flex flex-col items-center">
+          <span class="step-num font-serif text-3xl lg:text-4xl font-light leading-none">01</span>
+          <div class="w-[1px] flex-1 bg-gradient-to-b from-gold/30 to-transparent mt-2 hidden lg:block"></div>
+        </div>
+        <div>
+          <h3 class="font-display text-xs lg:text-sm font-medium uppercase tracking-wider text-dark mb-3">The Courtship</h3>
+          <p class="font-serif text-sm lg:text-base text-muted leading-relaxed">
+            What began as a simple connection grew into a love rooted in respect, friendship, and shared purpose. With the blessing of their families, Moabi and Lebo choose to walk life's journey together — honouring both love and culture.
+          </p>
+        </div>
+      </article>
+
+      <!-- Step 02 -->
+      <article class="reveal group flex gap-5 p-7 lg:p-8 bg-cream-2/40 border border-dark/6 rounded-2xl hover:border-gold/35 hover:bg-cream-2/60 hover:shadow-gold-sm transition-all duration-400">
+        <div class="shrink-0 flex flex-col items-center">
+          <span class="step-num font-serif text-3xl lg:text-4xl font-light leading-none">02</span>
+          <div class="w-[1px] flex-1 bg-gradient-to-b from-gold/30 to-transparent mt-2 hidden lg:block"></div>
+        </div>
+        <div>
+          <h3 class="font-display text-xs lg:text-sm font-medium uppercase tracking-wider text-dark mb-3">Magadi / Lobola</h3>
+          <p class="font-serif text-sm lg:text-base text-muted leading-relaxed">
+            In the presence of elders and family, two households came together in dignity, dialogue, and mutual respect. This sacred tradition marks not only the union of two people, but the joining of two families and their histories.
+          </p>
+        </div>
+      </article>
+
+      <!-- Step 03 -->
+      <article class="reveal group flex gap-5 p-7 lg:p-8 bg-cream-2/40 border border-dark/6 rounded-2xl hover:border-gold/35 hover:bg-cream-2/60 hover:shadow-gold-sm transition-all duration-400">
+        <div class="shrink-0 flex flex-col items-center">
+          <span class="step-num font-serif text-3xl lg:text-4xl font-light leading-none">03</span>
+          <div class="w-[1px] flex-1 bg-gradient-to-b from-gold/30 to-transparent mt-2 hidden lg:block"></div>
+        </div>
+        <div>
+          <h3 class="font-display text-xs lg:text-sm font-medium uppercase tracking-wider text-dark mb-3">The Gift Exchange</h3>
+          <p class="font-serif text-sm lg:text-base text-muted leading-relaxed">
+            Gifts shared with gratitude and joy — symbols of appreciation, unity, and the weaving together of two homes. Through laughter, celebration, and culture, bonds between families will be strengthened for generations.
+          </p>
+        </div>
+      </article>
+
+      <!-- Step 04 -->
+      <article class="reveal group flex gap-5 p-7 lg:p-8 bg-cream-2/40 border border-dark/6 rounded-2xl hover:border-gold/35 hover:bg-cream-2/60 hover:shadow-gold-sm transition-all duration-400">
+        <div class="shrink-0 flex flex-col items-center">
+          <span class="step-num font-serif text-3xl lg:text-4xl font-light leading-none">04</span>
+          <div class="w-[1px] flex-1 bg-gradient-to-b from-gold/30 to-transparent mt-2 hidden lg:block"></div>
+        </div>
+        <div>
+          <h3 class="font-display text-xs lg:text-sm font-medium uppercase tracking-wider text-dark mb-3">The Wedding Day</h3>
+          <p class="font-serif text-sm lg:text-base text-muted leading-relaxed">
+            On 26 September 2026, Moabi and Lebo stand before those they love most to celebrate a journey guided by faith, family, and love. Two hearts become one future — rich in culture, abundant in joy.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       VENUE
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 px-6 bg-cream-2/35 border-y border-dark/6" id="venue" aria-labelledby="venue-title">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-3">The Venue</p>
+        <h2 id="venue-title" class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light uppercase tracking-widest text-dark">
+          Where We Celebrate
+        </h2>
+        <div class="ornate-rule mt-6 max-w-xs mx-auto">
+          <div class="flex gap-1">
+            <div class="w-2 h-2 bg-gold rotate-45 opacity-60"></div>
+            <div class="w-2.5 h-2.5 bg-gold rotate-45"></div>
+            <div class="w-2 h-2 bg-gold rotate-45 opacity-60"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop: side-by-side. Mobile: stacked -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 lg:gap-16 items-center">
+
+        <!-- Venue photo -->
+        <div class="reveal reveal-left relative h-[300px] lg:h-[460px] rounded-3xl overflow-hidden border border-gold/25 shadow-gold-md order-2 lg:order-1 group">
+          <!-- Real venue image -->
+          <img
+            src="assets/images/venue-marquee.png"
+            alt="Wedding marquee prepared for the celebration at Sunnyside Farm"
+            class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+          >
+          <!-- Gradient: light on top so the image reads well, richer at bottom for the caption -->
+          <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent pointer-events-none"></div>
+          <!-- Gold frame accent on hover -->
+          <div class="absolute inset-0 rounded-3xl ring-0 ring-gold/0 group-hover:ring-1 group-hover:ring-gold/40 transition-all duration-500 pointer-events-none"></div>
+
+          <!-- Caption pinned to bottom -->
+          <div class="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
+            <div>
+              <span class="block font-display text-[9px] tracking-[0.35em] uppercase text-gold mb-1">Our Venue</span>
+              <p class="font-serif text-white text-lg leading-tight">Sunnyside Farm</p>
+              <p class="font-serif italic text-white/70 text-sm mt-0.5">Marquee Area · Vryburg</p>
+            </div>
+            <!-- Pin icon -->
+            <div class="w-10 h-10 rounded-full bg-dark/60 border border-gold/40 flex items-center justify-center shrink-0 backdrop-blur-sm">
+              <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Venue details -->
+        <div class="reveal reveal-right flex flex-col gap-8 order-1 lg:order-2">
+          <!-- Name -->
+          <div>
+            <p class="font-display text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Celebrating at</p>
+            <h3 class="font-serif text-3xl lg:text-4xl font-light uppercase tracking-wider text-dark leading-snug">
+              Sunnyside Farm
+            </h3>
+            <p class="font-serif italic text-muted-lt mt-2">Vryburg, North West · South Africa</p>
+          </div>
+
+          <!-- Details grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-cream rounded-2xl p-5 border border-dark/6">
+              <p class="font-display text-[9px] tracking-[0.3em] uppercase text-gold mb-2">Arrival</p>
+              <p class="font-serif text-dark text-lg">13:00</p>
+            </div>
+            <div class="bg-cream rounded-2xl p-5 border border-dark/6">
+              <p class="font-display text-[9px] tracking-[0.3em] uppercase text-gold mb-2">Ceremony</p>
+              <p class="font-serif text-dark text-lg">14:00</p>
+            </div>
+            <div class="bg-cream rounded-2xl p-5 border border-dark/6 col-span-2">
+              <p class="font-display text-[9px] tracking-[0.3em] uppercase text-gold mb-2">Date</p>
+              <p class="font-serif text-dark text-lg">26 September 2026</p>
+            </div>
+          </div>
+
+          <!-- Attire note -->
+          <p class="font-serif italic text-sm text-muted border-l-2 border-gold/40 pl-4 leading-relaxed">
+            Traditional attire is warmly encouraged. Guests may wear elegant earth tones, burgundy, cream, or gold.
+          </p>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap gap-3">
+            <a class="btn-primary px-6 py-3 rounded-full font-display text-[10px] tracking-[0.25em] uppercase text-dark shadow-gold-sm"
+               href="https://www.google.com/maps/search/?api=1&query=Sunnyside%20Farm%20Vryburg%20North%20West%20South%20Africa"
+               target="_blank" rel="noopener noreferrer">
+              Open in Maps
+            </a>
+            <button type="button" data-open-attire
+              class="px-6 py-3 rounded-full border border-dark/20 font-display text-[10px] tracking-[0.25em] uppercase text-dark hover:border-gold/60 hover:text-gold transition-all duration-300">
+              Attire Guide
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       COUNTDOWN
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 lg:py-36 px-6 zulu-pattern-bg text-cream overflow-hidden" id="countdown" aria-labelledby="countdown-title">
+    <div class="absolute inset-0 bg-dark/80 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/30 via-transparent to-dark/30 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto text-center reveal">
+      <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-4">Counting the Days</p>
+      <h2 id="countdown-title" class="font-serif text-4xl lg:text-5xl font-light uppercase tracking-widest text-cream mb-14">
+        Until We Are United
+      </h2>
+
+      <!-- Countdown cards -->
+      <div class="grid grid-cols-4 gap-3 lg:gap-6" aria-live="polite">
+        <div class="count-card rounded-2xl lg:rounded-3xl p-5 lg:p-8 shadow-gold-md">
+          <strong id="days" class="block font-serif text-4xl lg:text-6xl font-light text-gold leading-none">00</strong>
+          <div class="w-8 h-[1px] bg-gold/30 mx-auto my-3"></div>
+          <span class="font-display text-[8px] lg:text-[10px] text-cream-2/70 tracking-[0.3em] uppercase">Days</span>
+        </div>
+        <div class="count-card rounded-2xl lg:rounded-3xl p-5 lg:p-8 shadow-gold-md">
+          <strong id="hours" class="block font-serif text-4xl lg:text-6xl font-light text-gold leading-none">00</strong>
+          <div class="w-8 h-[1px] bg-gold/30 mx-auto my-3"></div>
+          <span class="font-display text-[8px] lg:text-[10px] text-cream-2/70 tracking-[0.3em] uppercase">Hours</span>
+        </div>
+        <div class="count-card rounded-2xl lg:rounded-3xl p-5 lg:p-8 shadow-gold-md">
+          <strong id="minutes" class="block font-serif text-4xl lg:text-6xl font-light text-gold leading-none">00</strong>
+          <div class="w-8 h-[1px] bg-gold/30 mx-auto my-3"></div>
+          <span class="font-display text-[8px] lg:text-[10px] text-cream-2/70 tracking-[0.3em] uppercase">Mins</span>
+        </div>
+        <div class="count-card rounded-2xl lg:rounded-3xl p-5 lg:p-8 shadow-gold-md">
+          <strong id="seconds" class="block font-serif text-4xl lg:text-6xl font-light text-gold leading-none">00</strong>
+          <div class="w-8 h-[1px] bg-gold/30 mx-auto my-3"></div>
+          <span class="font-display text-[8px] lg:text-[10px] text-cream-2/70 tracking-[0.3em] uppercase">Secs</span>
+        </div>
+      </div>
+
+      <p class="font-serif italic text-cream-2/50 text-sm mt-10">26 September 2026 · Sunnyside Farm · Vryburg</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       RSVP
+  ══════════════════════════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 px-6 bg-cream" id="rsvp" aria-labelledby="rsvp-title">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_560px] gap-12 lg:gap-20 items-start">
+
+        <!-- Left: decorative info panel (desktop only) -->
+        <div class="reveal reveal-left hidden lg:flex flex-col justify-center gap-10 pt-6">
+          <!-- Big cursive display -->
+          <div>
+            <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-4">Join the Celebration</p>
+            <h2 id="rsvp-title" class="font-serif text-5xl xl:text-6xl font-light text-dark leading-snug uppercase tracking-widest">
+              Confirm Your<br>Attendance
+            </h2>
+          </div>
+
+          <div class="ornate-rule max-w-[180px]">
+            <div class="w-2.5 h-2.5 bg-gold rotate-45"></div>
+          </div>
+
+          <!-- Info blocks -->
+          <div class="space-y-6">
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-display text-[10px] tracking-[0.25em] uppercase text-dark font-medium">RSVP Deadline</p>
+                <p class="font-serif text-muted-lt text-sm mt-1">Please respond by 31 July 2026</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-display text-[10px] tracking-[0.25em] uppercase text-dark font-medium">Attire</p>
+                <p class="font-serif text-muted-lt text-sm mt-1">Traditional attire warmly encouraged</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-display text-[10px] tracking-[0.25em] uppercase text-dark font-medium">Venue</p>
+                <p class="font-serif text-muted-lt text-sm mt-1">Sunnyside Farm, Vryburg, North West</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote / blessing -->
+          <blockquote class="border-l-2 border-gold/40 pl-5 mt-4">
+            <p class="font-serif italic text-muted text-base leading-relaxed">
+              "A family is a circle of love — it grows with every new member."
+            </p>
+          </blockquote>
+        </div>
+
+        <!-- Right: RSVP Form panel -->
+        <div class="reveal reveal-right">
+          <!-- Mobile header (hidden on desktop) -->
+          <div class="lg:hidden text-center mb-10">
+            <p class="font-display text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Join the Celebration</p>
+            <h2 id="rsvp-title-mobile" class="font-serif text-4xl font-light uppercase tracking-widest text-dark">
+              Confirm Attendance
+            </h2>
+            <div class="ornate-rule mt-4">
+              <div class="w-2.5 h-2.5 bg-gold rotate-45"></div>
+            </div>
+            <p class="font-cursive text-gold text-2xl mt-4">You are invited</p>
+            <p class="font-serif text-sm text-muted mt-2">Please RSVP by 31 July 2026</p>
+          </div>
+
+          <!-- Form card -->
+          <div class="bg-cream-2/30 border border-dark/8 rounded-3xl p-8 lg:p-10 shadow-gold-sm">
+            <form id="rsvp-form" class="space-y-6 text-left" action="submit-rsvp.php" method="post" novalidate>
+
+              <!-- Full Name -->
+              <div class="flex flex-col gap-2">
+                <label for="field-name" class="font-display text-[9px] tracking-[0.3em] uppercase text-dark flex justify-between">
+                  <span>Full Name</span><span class="text-gold">Required</span>
+                </label>
+                <input id="field-name" type="text" name="full_name" autocomplete="name" required placeholder="Your full name"
+                  class="form-input w-full bg-cream/80 border border-dark/15 rounded-xl px-4 py-3.5 text-sm text-dark placeholder:text-muted/40 focus:outline-none focus:border-gold transition-all duration-300">
+              </div>
+
+              <!-- Phone -->
+              <div class="flex flex-col gap-2">
+                <label for="field-phone" class="font-display text-[9px] tracking-[0.3em] uppercase text-dark flex justify-between">
+                  <span>Phone Number</span><span class="text-gold">Required</span>
+                </label>
+                <input id="field-phone" type="tel" name="phone" autocomplete="tel" required placeholder="+27 __ ___ ____"
+                  class="form-input w-full bg-cream/80 border border-dark/15 rounded-xl px-4 py-3.5 text-sm text-dark placeholder:text-muted/40 focus:outline-none focus:border-gold transition-all duration-300">
+              </div>
+
+              <!-- Attendance Radio Cards -->
+              <fieldset>
+                <legend class="font-display text-[9px] tracking-[0.3em] uppercase text-dark mb-3">Will You Attend?</legend>
+                <div class="grid grid-cols-2 gap-4">
+                  <label class="radio-card-label cursor-pointer">
+                    <input type="radio" name="attendance" value="Accept" required class="sr-only" id="radio-accept">
+                    <div id="card-accept" class="radio-card bg-cream/80 border border-dark/15 rounded-xl py-4 text-center">
+                      <div class="flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-gold opacity-0 check-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="font-display text-[10px] tracking-[0.2em] uppercase text-dark">Accept</span>
+                      </div>
+                    </div>
+                  </label>
+                  <label class="radio-card-label cursor-pointer">
+                    <input type="radio" name="attendance" value="Decline" class="sr-only" id="radio-decline">
+                    <div id="card-decline" class="radio-card bg-cream/80 border border-dark/15 rounded-xl py-4 text-center">
+                      <div class="flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-gold opacity-0 check-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span class="font-display text-[10px] tracking-[0.2em] uppercase text-dark">Decline</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Message -->
+              <div class="flex flex-col gap-2">
+                <label for="field-message" class="font-display text-[9px] tracking-[0.3em] uppercase text-dark">
+                  Message to the Couple <span class="text-muted/50 normal-case font-sans text-[10px]">(optional)</span>
+                </label>
+                <textarea id="field-message" name="message" rows="4" placeholder="Send your warm wishes…"
+                  class="form-input w-full bg-cream/80 border border-dark/15 rounded-xl px-4 py-3.5 text-sm text-dark placeholder:text-muted/40 focus:outline-none focus:border-gold transition-all duration-300 resize-none"></textarea>
+              </div>
+
+              <!-- Honeypot (Anti-spam) -->
+              <div class="absolute left-[-9999px]" aria-hidden="true">
+                <label>Do not fill<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit"
+                class="btn-primary w-full py-4 rounded-full text-dark font-display text-[10px] tracking-[0.3em] uppercase shadow-gold-md mt-2">
+                Send Confirmation
+              </button>
+
+              <!-- Attire button -->
+              <button type="button" data-open-attire
+                class="w-full py-3 rounded-full border border-dark/15 text-dark hover:border-gold/60 hover:text-gold font-display text-[9px] tracking-[0.3em] uppercase transition-all duration-300">
+                View Attire Guide
+              </button>
+
+              <!-- Status message -->
+              <p id="form-status" class="font-serif text-sm text-center min-h-[24px] transition-all duration-300" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════ -->
+  <footer class="relative zulu-pattern-bg text-cream overflow-hidden">
+    <div class="absolute inset-0 bg-dark/85 pointer-events-none"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 lg:py-28">
+      <!-- Top ornate bar -->
+      <div class="ornate-rule mb-12">
+        <div class="flex gap-2">
+          <div class="w-2 h-2 border border-gold/50 rotate-45"></div>
+          <div class="w-3 h-3 bg-gold rotate-45"></div>
+          <div class="w-2 h-2 border border-gold/50 rotate-45"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 text-center lg:text-left">
+        <!-- Brand -->
+        <div class="flex flex-col items-center lg:items-start gap-4 col-span-1 lg:col-span-1">
+          <p class="gold-shimmer font-cursive text-5xl">Moabi &amp; Lebo</p>
+          <p class="font-serif italic text-cream-2/60 text-sm leading-relaxed max-w-[220px]">
+            Where culture, family, and love become one.
+          </p>
+          <div class="flex gap-2 mt-2">
+            <span class="w-2 h-2 bg-gold/40 rotate-45"></span>
+            <span class="w-2.5 h-2.5 bg-gold rotate-45"></span>
+            <span class="w-2 h-2 bg-gold/40 rotate-45"></span>
+          </div>
+        </div>
+
+        <!-- Event details -->
+        <div class="flex flex-col items-center lg:items-start gap-4">
+          <p class="font-display text-[9px] tracking-[0.35em] uppercase text-gold mb-1">The Day</p>
+          <p class="font-serif text-cream text-lg">26 September 2026</p>
+          <p class="font-serif text-cream-2/60 text-sm">Sunnyside Farm, Vryburg</p>
+          <p class="font-serif text-cream-2/60 text-sm">North West, South Africa</p>
+          <p class="font-serif italic text-gold/70 text-sm mt-2">Arrival 13:00 · Ceremony 14:00</p>
+        </div>
+
+        <!-- Quick links -->
+        <div class="flex flex-col items-center lg:items-start gap-3">
+          <p class="font-display text-[9px] tracking-[0.35em] uppercase text-gold mb-1">Navigation</p>
+          <a href="#our-path"  class="font-display text-[10px] tracking-[0.2em] uppercase text-cream-2/60 hover:text-gold transition-colors">Our Story</a>
+          <a href="#venue"     class="font-display text-[10px] tracking-[0.2em] uppercase text-cream-2/60 hover:text-gold transition-colors">Venue</a>
+          <a href="#countdown" class="font-display text-[10px] tracking-[0.2em] uppercase text-cream-2/60 hover:text-gold transition-colors">Countdown</a>
+          <a href="#rsvp"      class="font-display text-[10px] tracking-[0.2em] uppercase text-gold hover:text-gold-lt transition-colors mt-1">RSVP Now →</a>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="ornate-rule mt-14 mb-8">
+        <div class="flex gap-2">
+          <div class="w-2 h-2 border border-gold/40 rotate-45"></div>
+          <div class="w-2.5 h-2.5 bg-gold/50 rotate-45"></div>
+          <div class="w-2 h-2 border border-gold/40 rotate-45"></div>
+        </div>
+      </div>
+
+      <p class="font-display text-[9px] tracking-[0.2em] uppercase text-cream-2/30 text-center">
+        &copy; 2026 Moabi &amp; Lebo · With Love
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ATTIRE DIALOG
+  ══════════════════════════════════════════════════════════════ -->
+  <dialog id="attire-dialog"
+    class="w-[calc(100%-32px)] max-w-[480px] rounded-3xl border-0 p-0 bg-cream text-dark shadow-2xl backdrop:bg-dark/80 backdrop:backdrop-blur-sm open:opacity-100 open:scale-100 opacity-0 scale-95 transition-all duration-300 ease-out"
+    style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);">
+    <div class="relative flex flex-col items-center text-center p-10 lg:p-12">
+      <!-- Close -->
+      <button type="button" data-close-attire aria-label="Close"
+        class="absolute top-5 right-5 w-9 h-9 rounded-full border border-dark/10 flex items-center justify-center text-muted hover:bg-dark hover:text-cream text-sm transition-all duration-300">
+        ✕
+      </button>
+
+      <!-- Icon -->
+      <div class="w-14 h-14 rounded-full bg-gold/10 border border-gold/25 flex items-center justify-center mb-6">
+        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+        </svg>
+      </div>
+
+      <p class="font-display text-[9px] tracking-[0.35em] uppercase text-gold mb-3">Attire Guide</p>
+      <h2 class="font-serif text-2xl lg:text-3xl font-light uppercase tracking-wider text-dark mb-6">
+        Dress with Intention
+      </h2>
+
+      <p class="font-serif text-sm text-muted leading-relaxed mb-4 max-w-sm">
+        Guests are warmly encouraged to arrive in elegant <strong class="text-dark font-semibold">traditional wear</strong>. Cultural dress from any heritage is celebrated.
+      </p>
+
+      <div class="bg-cream-2/40 rounded-2xl p-5 mb-8 text-left w-full border border-dark/6">
+        <p class="font-display text-[9px] tracking-[0.25em] uppercase text-gold mb-3">Suggested colour palette</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full bg-dark text-cream text-[10px] font-sans">Warm Earth Tones</span>
+          <span class="px-3 py-1 rounded-full bg-[#6b1e1e] text-cream text-[10px] font-sans">Burgundy</span>
+          <span class="px-3 py-1 rounded-full bg-cream-2 text-dark text-[10px] font-sans border border-dark/10">Cream</span>
+          <span class="px-3 py-1 rounded-full bg-gold text-dark text-[10px] font-sans">Gold</span>
+          <span class="px-3 py-1 rounded-full bg-cream/80 text-dark text-[10px] font-sans border border-dark/10">Formal Celebration</span>
+        </div>
+      </div>
+
+      <button type="button" data-close-attire
+        class="btn-primary px-10 py-3 rounded-full text-dark font-display text-[10px] tracking-[0.3em] uppercase shadow-gold-sm">
+        Perfect, Thank You
+      </button>
+    </div>
+  </dialog>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPTS
+  ══════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── LOADER ──────────────────────────────────────────────────
+    document.body.classList.add('overflow-hidden');
+    window.addEventListener('DOMContentLoaded', () => {
+      const loader   = document.getElementById('loader');
+      const subtitle = document.getElementById('loader-subtitle');
+      const title    = document.getElementById('loader-title');
+      const desc     = document.getElementById('loader-desc');
+      const line     = document.getElementById('loader-line');
+
+      setTimeout(() => subtitle.classList.remove('opacity-0','translate-y-4'),  350);
+      setTimeout(() => title.classList.remove('opacity-0','translate-y-4'),     700);
+      setTimeout(() => { desc.classList.remove('opacity-0','translate-y-4'); line.classList.remove('scale-x-0'); }, 1050);
+
+      setTimeout(() => {
+        loader.classList.add('opacity-0','pointer-events-none');
+        document.body.classList.remove('overflow-hidden');
+        // Show nav after loader
+        const nav = document.getElementById('site-nav');
+        nav.classList.remove('opacity-0','pointer-events-none');
+        // Trigger hero reveal
+        document.getElementById('hero-content').classList.add('visible');
+      }, 3400);
+    });
+
+    // ── STICKY NAV BACKGROUND ───────────────────────────────────
+    const siteNav = document.getElementById('site-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        siteNav.style.background    = 'rgba(26,13,7,0.92)';
+        siteNav.style.backdropFilter = 'blur(14px)';
+        siteNav.style.borderBottom  = '1px solid rgba(200,136,46,0.15)';
+      } else {
+        siteNav.style.background    = 'transparent';
+        siteNav.style.backdropFilter = 'none';
+        siteNav.style.borderBottom  = 'none';
+      }
+    }, { passive: true });
+
+    // ── MOBILE MENU ─────────────────────────────────────────────
+    const mobileMenu    = document.getElementById('mobile-menu');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    mobileMenuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('flex');
+      mobileMenu.classList.toggle('flex',   !isOpen);
+      mobileMenu.classList.toggle('hidden',  isOpen);
+    });
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('flex');
     }
-];
 
-
-    let themesVisible = false;
-
-    function createMindMap() {
-        const mindMap = document.getElementById('mindMap');
-        const svg = document.getElementById('connectionsSvg');
-        const centerNode = document.getElementById('centerNode');
-        const rect = mindMap.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const radius = Math.min(rect.width, rect.height) * 0.35;
-
-        centerNode.style.left = `${centerX - 75}px`;
-        centerNode.style.top = `${centerY - 75}px`;
-
-        themes.forEach((theme, index) => {
-            const angle = (index / themes.length) * 2 * Math.PI;
-            const x = centerX + radius * Math.cos(angle);
-            const y = centerY + radius * Math.sin(angle);
-
-            const themeNode = document.createElement('div');
-            themeNode.className = 'theme-node';
-            themeNode.textContent = theme.title;
-            themeNode.style.left = `${x - 60}px`;
-            themeNode.style.top = `${y - 25}px`;
-            themeNode.onclick = (e) => {
-                e.stopPropagation();
-                showThemeDetails(theme.title, theme.codes);
-            };
-
-            mindMap.appendChild(themeNode);
-
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = `M${centerX},${centerY} Q${centerX + (x-centerX)*0.5},${centerY + (y-centerY)*0.5} ${x},${y}`;
-            path.setAttribute('d', d);
-            svg.appendChild(path);
-        });
-    }
-
-    function toggleThemes() {
-        const themeNodes = document.querySelectorAll('.theme-node');
-        const paths = document.querySelectorAll('path');
-        themesVisible = !themesVisible;
-
-        themeNodes.forEach((node, index) => {
-            setTimeout(() => {
-                node.classList.toggle('active');
-            }, index * 50);
-        });
-
-        paths.forEach((path, index) => {
-            setTimeout(() => {
-                path.style.opacity = themesVisible ? 1 : 0;
-            }, index * 50);
-        });
-    }
-
-    function showThemeDetails(title, codes) {
-        const themePopup = document.getElementById('themePopup');
-        const themeTitle = document.getElementById('themeTitle');
-        const codeList = document.getElementById('codeList');
-
-        themeTitle.textContent = title;
-        codeList.innerHTML = '';
-        codes.forEach(codeObj => {
-            const li = document.createElement('li');
-            li.className = 'code-item';
-            li.textContent = codeObj.code;
-            li.onclick = () => showExpertInfo(codeObj.code, codeObj.expert);
-            codeList.appendChild(li);
-        });
-        showPopup('themePopup');
-    }
-
-    function showExpertInfo(title, description) {
-        const expertTitle = document.getElementById('expertTitle');
-        const expertDescription = document.getElementById('expertDescription');
-
-        expertTitle.textContent = title;
-        expertDescription.textContent = description;
-        showPopup('expertPopup');
-    }
-
-    function showPopup(popupId) {
-        const popup = document.getElementById(popupId);
-        popup.classList.add('active');
-    }
-
-    function hidePopup(popupId) {
-        const popup = document.getElementById(popupId);
-        popup.classList.remove('active');
-    }
-
-    document.getElementById('centerNode').addEventListener('click', toggleThemes);
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.theme-node') && !e.target.closest('.popup') && !e.target.closest('.center-node')) {
-            hidePopup('themePopup');
-            hidePopup('expertPopup');
+    // ── SCROLL REVEAL ────────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
         }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── COUNTDOWN ────────────────────────────────────────────────
+    const weddingDate = new Date('2026-09-26T14:00:00+02:00').getTime();
+    function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+    function updateCountdown() {
+      const diff = Math.max(0, weddingDate - Date.now());
+      const s    = Math.floor(diff / 1000);
+      document.getElementById('days').textContent    = pad(Math.floor(s / 86400));
+      document.getElementById('hours').textContent   = pad(Math.floor((s % 86400) / 3600));
+      document.getElementById('minutes').textContent = pad(Math.floor((s % 3600) / 60));
+      document.getElementById('seconds').textContent = pad(s % 60);
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ── RADIO CARDS ─────────────────────────────────────────────
+    const radioInputs = document.querySelectorAll('[name="attendance"]');
+    radioInputs.forEach(radio => {
+      radio.addEventListener('change', () => {
+        // Reset all
+        document.getElementById('card-accept').classList.remove('selected');
+        document.getElementById('card-decline').classList.remove('selected');
+        document.querySelectorAll('.check-icon').forEach(i => i.classList.add('opacity-0'));
+        // Activate chosen
+        const card = radio.value === 'Accept' ? 'card-accept' : 'card-decline';
+        const cardEl = document.getElementById(card);
+        cardEl.classList.add('selected');
+        cardEl.querySelector('.check-icon').classList.remove('opacity-0');
+      });
     });
 
-    window.addEventListener('resize', () => {
-        document.getElementById('mindMap').innerHTML = '<div class="center-node" id="centerNode">Crisis Management Themes</div><svg id="connectionsSvg"></svg>';
-        createMindMap();
-        if (themesVisible) toggleThemes();
-    });
+    // ── ATTIRE DIALOG ────────────────────────────────────────────
+    const dialog    = document.getElementById('attire-dialog');
+    const openBtns  = document.querySelectorAll('[data-open-attire]');
+    const closeBtns = document.querySelectorAll('[data-close-attire]');
 
-    createMindMap();
-    </script>
+    function openModal() {
+      dialog.showModal();
+    }
+    function closeModal() {
+      dialog.close();
+    }
+
+    openBtns.forEach(b => b.addEventListener('click', openModal));
+    closeBtns.forEach(b => b.addEventListener('click', closeModal));
+    dialog.addEventListener('click', e => { if (e.target === dialog) closeModal(); });
+
+    // ── RSVP FORM → PHP backend ─────────────────────────────────
+    const form      = document.getElementById('rsvp-form');
+    const statusMsg = document.getElementById('form-status');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = form.full_name.value.trim();
+
+      statusMsg.style.color = '#c8882e';
+      statusMsg.textContent  = 'Sending your confirmation…';
+
+      try {
+        const res    = await fetch(form.action, {
+          method:  'POST',
+          body:    new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        const result = await res.json();
+
+        if (res.ok && result.ok) {
+          statusMsg.style.color = '#2d7a4f';
+          statusMsg.textContent  = result.message ||
+            (form.attendance.value === 'Accept'
+              ? `Siyabonga, ${name}! Your presence has been joyfully accepted.`
+              : `Siyabonga, ${name}. Your message has been sent to the couple.`);
+          form.reset();
+          // Reset radio cards
+          document.getElementById('card-accept').classList.remove('selected');
+          document.getElementById('card-decline').classList.remove('selected');
+          document.querySelectorAll('.check-icon').forEach(i => i.classList.add('opacity-0'));
+        } else {
+          statusMsg.style.color = '#c0392b';
+          statusMsg.textContent  = result.message || 'Please fill in all required fields.';
+        }
+      } catch {
+        statusMsg.style.color = '#c0392b';
+        statusMsg.textContent  = 'Could not send your RSVP. Please try again.';
+      }
+    });
+  </script>
 </body>
 </html>
